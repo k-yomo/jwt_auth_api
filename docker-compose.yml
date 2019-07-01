@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db:
+    restart: always
+    image: postgres:9.6
+    volumes:
+      - db_data:/var/lib/postgrse
+    ports:
+      - "15432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: "Asia/Tokyo"
+
+  app:
+    build:
+      context: .
+    volumes:
+      - .:/jwt_auth_api
+    tty: true
+    stdin_open: true
+    ports:
+      - "13000:3000"
+    environment:
+      RAILS_ENV: development
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    depends_on:
+      - db
+
+volumes:
+  db_data:
