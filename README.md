@@ -50,7 +50,7 @@ GET /v1/auth/me
 
 - Delete User
 ```
-DELETE /v1/users
+DELETE /v1/auth/me
 // You need to set JWT token to Bearer Token
 ```
 

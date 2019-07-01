@@ -4,7 +4,8 @@ Rails.application.routes.draw do
     namespace :auth do
       post 'sign_in' => 'user_token#create'
       get 'me' => 'users#show'
+      delete 'me' => 'users#destroy'
     end
-    resources :users, only: %i[create destroy]
+    resources :users, only: %i[create]
   end
 end
