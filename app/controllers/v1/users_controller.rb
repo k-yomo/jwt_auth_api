@@ -6,7 +6,7 @@ module V1
     def create
       u = User.new(user_params)
       if u.save
-        render json: current_user, serializer: UserSerializer, status: :ok
+        render json: u, serializer: UserSerializer, status: :ok
       else
         render json: u.errors.full_messages, status: :bad_request
       end
